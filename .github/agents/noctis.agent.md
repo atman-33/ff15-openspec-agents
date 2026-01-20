@@ -5,7 +5,7 @@ argument-hint: 報告したいIssueまたはリクエストしたい機能を説
 infer: false
 model: Claude Sonnet 4.5 (copilot)
 tools:
-  ['read', 'edit', 'search', 'execute', 'agent', 'todo']
+  ['execute', 'read', 'edit', 'search', 'playwright/*', 'agent', 'todo']
 ---
 
 ソフトウェア開発統括エージェントです。ユーザーと協力してOpenSpecドキュメントを作成し、専門エージェントにタスクを委任して全体の実装ワークフローを調整します。

@@ -39,6 +39,7 @@ const drawMessage = (ctx: CanvasRenderingContext2D, message: string): void => {
 }
 
 const drawGame = (ctx: CanvasRenderingContext2D, gameData: GameData): void => {
+  console.log('Drawing game', { gameState: gameData.gameState, ballY: gameData.ball.y })
   ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
 
   ctx.fillStyle = '#0f172a'
@@ -102,16 +103,20 @@ const Game = (): ReactElement => {
 
   const startLoop = useCallback((): void => {
     if (isRunningRef.current) {
+      console.log('Game loop already running')
       return
     }
 
+    console.log('Starting game loop')
     isRunningRef.current = true
 
     const step = (): void => {
+      console.log('Step function called')
       const canvas = canvasRef.current
       const context = canvas?.getContext('2d')
 
       if (!canvas || !context) {
+        console.error('Canvas or context not available')
         isRunningRef.current = false
         return
       }
@@ -127,6 +132,7 @@ const Game = (): ReactElement => {
       if (gameData.gameState === 'playing') {
         animationFrameRef.current = window.requestAnimationFrame(step)
       } else {
+        console.log(`Game ended with state: ${gameData.gameState}`)
         isRunningRef.current = false
       }
     }
@@ -136,8 +142,14 @@ const Game = (): ReactElement => {
 
   const resetGame = useCallback((): void => {
     gameDataRef.current = createInitialGameData()
+    isRunningRef.current = false
+    if (animationFrameRef.current !== null) {
+      window.cancelAnimationFrame(animationFrameRef.current)
+      animationFrameRef.current = null
+    }
     startLoop()
-  }, [startLoop])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent): void => {
@@ -174,14 +186,19 @@ const Game = (): ReactElement => {
     startLoop()
 
     return () => {
+      console.log('Cleaning up game loop')
       window.removeEventListener('keydown', handleKeyDown)
       window.removeEventListener('keyup', handleKeyUp)
 
       if (animationFrameRef.current !== null) {
         window.cancelAnimationFrame(animationFrameRef.current)
+        animationFrameRef.current = null
       }
+      
+      isRunningRef.current = false
     }
-  }, [resetGame, startLoop])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <canvas
