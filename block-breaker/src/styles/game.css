@@ -1,0 +1,52 @@
+.game-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+}
+
+.game-card {
+  width: min(960px, 100%);
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.5);
+  color: #e2e8f0;
+}
+
+.game-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.game-kicker {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #38bdf8;
+  margin-bottom: 8px;
+}
+
+.game-header h1 {
+  font-size: 2.5rem;
+  margin: 0 0 8px;
+}
+
+.game-instructions {
+  margin: 0 auto;
+  max-width: 560px;
+  color: #cbd5f5;
+}
+
+.game-canvas-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+canvas {
+  border-radius: 16px;
+  border: 2px solid rgba(148, 163, 184, 0.3);
+  background: #0f172a;
+  box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.2);
+}

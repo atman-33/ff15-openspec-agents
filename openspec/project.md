@@ -1,11 +1,22 @@
 # Project Context
 
 ## Purpose
-[Describe your project's purpose and goals]
+FF15連携 OpenSpec Agents デモプロジェクト。
+AIエージェントチームによる開発フローの実証実験場として機能します。
 
 ## Tech Stack
-- [List your primary technologies]
-- [e.g., TypeScript, React, Node.js]
+- TypeScript
+- React
+- Vite
+- Vitest
+
+## Features
+
+### Block Breaker Game
+シンプルなブロック崩しゲーム。
+- キャンバスベースのレンダリング
+- パドル操作、ボール移動、ブロック破壊、スコア計算
+- ゲームオーバー/クリア判定
 
 ## Project Conventions
 
